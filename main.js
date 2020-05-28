@@ -140,6 +140,10 @@ console.log(encontrarLibroPorAutor)
 obtengo la cantidad disponible de cada uno y veo cuales tienen menos disponibles en base a su stock total
 devuelvo los 10 libros que menos tengan disponible en stock */
 
+//cant total - cant disponible = cant solicitado
+
+
+
 function obtenerLibrosMasPedidos(listaDeLibros) {
 
   const losMasPedidos = []
@@ -147,24 +151,25 @@ function obtenerLibrosMasPedidos(listaDeLibros) {
   for (let i = 0; i < listaDeLibros; i++) {
     const libros = listaDeLibros[i]
 
+    let cantSolicitado = libros.cantTotales - libros.cantDisponible
+    
     losMasPedidos.push({
       nombre: libros.nombre,
-      cantidadesDisponibles2: libros.cantDisponible,
-      cantidadesTotales2: libros.cantTotales,
+      solicitados: cantSolicitado
     })
   }
   
-  let TopMasPedidos = losMasPedidos.sort((a,b) => a.cantidadesTotales2-b.cantidadesDisponibles2).slice(0,3)
+  let topMasPedidos = losMasPedidos.sort((a,b) => b.solicitados-a.solicitados).slice(0,3)
   //lo hago con el top 3 de libros para probar
 
   
-  return TopMasPedidos
+  return topMasPedidos
 
 }
 
-let elTopDeLibros = obtenerLibrosMasPedidos(listaDeLibros)
+let eltopDeLibros = obtenerLibrosMasPedidos(listaDeLibros)
 
-console.log(elTopDeLibros)
+console.log(eltopDeLibros)
 
 
 /* 
@@ -176,3 +181,4 @@ en la consola no me define las cosas, como si no lo tomara
  a la cantidad
 
 -	No estoy logrando que me reconozca la lista de los mas pedidos cuando quiero que me los devuelva
+*/
